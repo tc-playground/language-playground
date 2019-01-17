@@ -6,9 +6,9 @@ Playing with...
 
 * [The Seasoned Schemer](https://mitpress.mit.edu/books/seasoned-schemer-second-edition)
 
-* [The Reasoned Shcemer](https://mitpress.mit.edu/books/reasoned-schemer-second-edition)
+* [The Reasoned Schemer](https://mitpress.mit.edu/books/reasoned-schemer-second-edition)
 
-* [The Little Typer](ihttps://mitpress.mit.edu/books/little-typer)
+* [The Little Typer](https://mitpress.mit.edu/books/little-typer)
 
 ---
 
