@@ -65,3 +65,53 @@
     ?- loves(X, juliet).
     X = romeo.
     ```
+
+---
+
+## Facts
+
+* For `facts`:
+
+    ```
+    male(albert).
+    male(bob).
+    male(bill).
+
+    female(alice).
+    female(betsy).
+    female(diana).
+    ```
+
+1. Fact check: 
+
+    ```
+    ?- female(alice).
+    true.
+    ```
+
+2. List facts with `listing`:
+
+    ```
+    ?- listing(female).
+    female(alice).
+    female(betsy).
+    female(diana).
+
+    true.
+    ```
+
+3. List the `cartesian product` of two sets:
+
+    ```
+    ?- male(X), female(Y).
+    X = albert,
+    Y = alice ;
+    X = albert,
+    Y = betsy 
+    ```
+
+    > Press `;` for more results.
+
+
+
+
