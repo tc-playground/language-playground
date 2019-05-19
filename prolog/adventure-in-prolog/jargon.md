@@ -20,15 +20,19 @@
 
 * Each `predicate` is defined by it `name` and `arity`.
 
+* A `predicates` arguments must be valid `terms`. Basic Prolog `terms` are:
+
+    * `integer` - A number. Also floats and other numeric types.
+
+    * `atom` - A string constant beginning with a lowercase letter.
+
+    * `variable` - A string beginning with an uppercase letter or underscore.
+
+    * `structure` - Complex `terms`.
+
 * Two `predicates` with the same `name` and different `arity` are considered to be different `predicates`.
 
-* A `predicates` arguments must be valid `terms`. 
-
 * Each `predicate` in a program is defined by the existence of one or more `clauses` in the database.
-
----
-
-## Terms
 
 ---
 
@@ -40,16 +44,31 @@
 
 ## Facts
 
+* `Facts` represent a record in a database.
+
 * __Syntax__
 
     ```
     predicate(arg1, arg2,...,argN).
     ```
 
+* __Example__
 
+    ```
+    human(socrates).
+    male(socrates).
+    ```
 
+---
 
+## Queries
+
+* A Prolog `listener` can be used to make `queries` against the `program`.
+
+---
 
 ## Backtracking
+
+---
 
 ## Unification
