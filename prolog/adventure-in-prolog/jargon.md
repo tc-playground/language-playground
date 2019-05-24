@@ -63,12 +63,53 @@
 
 ## Queries
 
-* A Prolog `listener` can be used to make `queries` against the `program`.
+* A Prolog `listener` can be used to execute `queries` against the `program`.
+
+
+* __Example__
+
+    ```
+    ?- human(X).
+    ```
+
+---
+
+## Goals
+
+* A `goal` is a `query pattern`.
+
+* When executing a `query pattern` against a `program`, Prolog tries to reach (`prove`) the `goal`.  
+
+* For `facts`:
+
+    * If there is a `fact` that matches the `goal`, then the `query` `succeeds` and the listener responds with `yes.` 
+
+    * If there is no `fact` that matches the `goal`, then the `query` `fails` and the listener responds with `no.`
+
+* Prolog's pattern matching is called `unification`.
+
+---
+
+## Unification
+
+* In the case where the `database` contains only `facts`, `unification` succeeds if the following three conditions hold:
+
+    * The predicate named in the goal and database are the same.
+    
+    * Both predicates have the same arity.
+    
+    * All of the arguments are the same.
+
+---
+
+## Variable Binding
+
+* After successful `unification`, a logical variable takes on the value of the term it was matched with. This is called `binding` the variable. 
+
+* __Example__
 
 ---
 
 ## Backtracking
 
----
 
-## Unification
