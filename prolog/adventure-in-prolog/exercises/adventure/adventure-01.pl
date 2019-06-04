@@ -5,7 +5,7 @@ room('dining room').
 room(hall).
 room(cellar).
 
-% Define Room Doorconnections. door(Room, Room)
+% Define Room Door connections. door(Room, Room)
 door(office, hall).
 door(hall, 'dining room').
 door('dining room', kitchen).
