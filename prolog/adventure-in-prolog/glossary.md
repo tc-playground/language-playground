@@ -1,4 +1,4 @@
-# Prolog Jargon
+# Glossary - Prolog Jargon
 
 ## Programs
 
@@ -59,6 +59,8 @@
     male(socrates).
     ```
 
+* `Facts` can be generalized by the use of Prolog `variables`. 
+
 ---
 
 ## Queries
@@ -86,6 +88,8 @@
 
     * If there is no `fact` that matches the `goal`, then the `query` `fails` and the listener responds with `no.`
 
+* `Goals` can be generalized by the use of Prolog `variables`. 
+
 * Prolog's pattern matching is called `unification`.
 
 ---
@@ -107,6 +111,32 @@
 * After successful `unification`, a logical variable takes on the value of the term it was matched with. This is called `binding` the variable. 
 
 * __Example__
+
+    ```
+    ?- location(Thing, kitchen).
+    Thing = apple ;
+    Thing = broccoli ;
+    Thing = crackers ;
+    no
+    ```
+
+---
+
+## Predicate Ports (Goal Resolution)
+
+* `Goal Ports`
+
+    ![Predicate Ports](./predicate_ports.gif "Predicate Ports")
+
+    * `call` : Begins searching for clauses that unify with the goal.
+
+    * `exit` : Indicates the goal is satisfied, __sets a place marker__ at the clause and __binds the variables__ appropriately.
+
+    * `redo` : Retries the goal, __unbinds the variables__ and resumes search at the place marker.
+
+    * `fail` : Indicates no more clauses match the goal.
+
+
 
 ---
 
