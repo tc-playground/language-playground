@@ -1,6 +1,6 @@
 # Customer Order system
 
-## [Customer Order System 01 - Facts](http://pages.cs.wisc.edu/~fischer/cs538.s00/prolog/A3SIMPLE.HTM)
+## [Customer Order System 02 - Simple Queries](http://pages.cs.wisc.edu/~fischer/cs538.s00/prolog/A3SIMPLE.HTM)
 
 1. Run `prolog` to start a shell.
 
