@@ -18,7 +18,7 @@
 
 8. Disable __trace__ mode: `notrace.`
 
-9;. Exit the session : `halt.`
+9. Exit the session : `halt.`
 
 ---
 
