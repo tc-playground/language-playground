@@ -18,7 +18,7 @@
     predicate(arg1, arg2,...,argN).
     ```
 
-* Each `predicate` is defined by it `name` and `arity`.
+* Each `predicate` is defined by its `name` and `arity`.
 
 * A `predicates` arguments must be valid `terms`. Basic Prolog `terms` are:
 
@@ -57,6 +57,7 @@
     ```
     human(socrates).
     male(socrates).
+    exists(X).
     ```
 
 * `Facts` can be generalized by the use of Prolog `variables`. 
@@ -65,7 +66,7 @@
 
 ## Queries
 
-* A Prolog `listener` can be used to execute `queries` against the `program`.
+* A Prolog `listener` (`repl`) can be used to execute `queries` against the `program`.
 
 
 * __Example__
@@ -104,6 +105,10 @@
     
     * All of the arguments are the same.
 
+* `Unification` is a type of `pattern matching`.
+
+* Successful `unification` results in `variable binding`.
+
 ---
 
 ## Variable Binding
@@ -124,22 +129,185 @@
 
 ## Predicate Ports (Goal Resolution)
 
+* When attempting to satisfy a `query goal` Prolog uses the concept of `ports` to manage the search through `clauses` that satisfy the `goal` or `sub-goals`. 
+
+* There are 4 `goal ports`.
+
 * `Goal Ports`
 
-    ![Predicate Ports](./predicate_ports.gif "Predicate Ports")
+    ![Predicate Ports](./predicate-ports-01.gif "Predicate Ports")
 
     * `call` : Begins searching for clauses that unify with the goal.
 
     * `exit` : Indicates the goal is satisfied, __sets a place marker__ at the clause and __binds the variables__ appropriately.
 
-    * `redo` : Retries the goal, __unbinds the variables__ and resumes search at the place marker.
+    * `redo` : Retries the goal, __unbinds the variables__ and resumes search at the `place marker`.
 
     * `fail` : Indicates no more clauses match the goal.
 
+---
 
+## Backtracking (`redo` port)
+
+* When a goal `fails` or `exits` with potentially further results, Prolog can `backtrack` by `unbinding` the currently set variable and resuming the search from the `place marker`.
+
+    ![Back tracking Predicate Ports](./predicate-ports-02.gif "Back tracking Predicate Ports")
 
 ---
 
-## Backtracking
+## Queries
+
+* Simple queries have one clause: `mortal(X).`
+
+---
+
+## Compound Queries
+
+* Simple goals can be combined to form `compound queries`.
+
+* __Conjunction ('and')__
+
+    * Simple goals can be combined to form compound queries.
+
+        ```
+        location(Thing, kitchen), edible(Thing).
+        ```
+
+        ```
+        door(kitchen, Room), location(Thing, Room).
+        ```
+
+    * The `scope` of a logical variable is a `query`.
+
+* __Disjunction ('or')__
+
+    * 
+
+* To understand the execution of a `compound query`, think of the goals as being _arranged from left to right_. 
+
+* Also think of a _separate table_ which is kept for the current `variable bindings`. 
+
+* The flow of control moves back and forth through the `goals` as Prolog attempts to find `variable bindings` that __satisfy__ the `query`.
+
+    > NB: Each goal can be entered from either the left or the right, and can be left from either the left or the right.
+
+---
+
+## Query Interpretation
+
+* Prolog `queries` can be interpreted in two ways:
+
+    ```
+    location(X, kitchen), edible(X).
+    ```
+
+    * __Logical__ : Is there an X such that X is located in the kitchen and X is edible?
+
+    * __Procedural__ : First find an X located in the kitchen, and then test to see if it is edible. If it is not, go back and find another X in the kitchen and test it. Repeat until successful, or until there are no more Xs in the kitchen.
+
+---
+
+## Built-In Predicates
+
+* Prolog has a set of `built in predicates` / `evaluable predicates` / `extra logical predicates`.
+
+* There are no `clauses` in the database for `built-in predicates`. 
+
+* When the `listener` encounters a `goal` that matches a built-in predicate, it _calls a predefined procedure_.
+
+    > NB: Built-in predicates are usually written in the language used to implement the listener. 
+
+* Built-in predicates _perform functions that have nothing to do with logical theorem proving_, e.g. IO, execution control, etc.
+
+* Since they appear as Prolog `goals` they must be able to respond to either a _`call` from the left_ or a _`redo` from the right_
+
+    * For `call` the in-built predicate is executed and then control always leaves via the `exit` port.
+
+    * For `redo` the in-built predicate is executed and then control always leaves via the `fail` port.
+
+        ![In-built Predicate Ports](./extra-logical-predicate-ports-01.gif "In-built Predicate Ports")
+
+* Built-in predicates do no affect the `variable table`,  but they can use values from it.
+
+* Built-in predicates can be used to control program flow. 
+
+    * `fail/0` can be used to __force back tracking__. It gets control from `call` the left and immediately passes control back to the `redo` port of the goal on the left.
+
+        ![fail Predicate Ports](./fail-predicate-ports-01.gif "fail Predicate Ports")
+
+* __Example__ - Query to display 'everything in kitchen'.
+
+    ```
+    location(X, kitchen), write(X) ,nl, fail.
+    ```
+
+    ![Predicate Ports Flow](./extra-logical-predicate-ports-flow-01.gif "Predicate Ports Flow")
+   
+
+
+---
+---
+
+## Appendix A - Query Execution Example
+
+```
+% Program
+
+door(kitchen, office).
+door(kitchen, cellar).
+
+location(desk, office).
+location(computer, office).
+location('washing machine', cellar).
+```
+
+```
+% Query
+
+Goal: door(kitchen, R), location(T,R)
+
+1 CALL door(kitchen, R)
+1 EXIT (2) door(kitchen, office)
+2 CALL location(T, office)
+2 EXIT (1) location(desk, office)
+    R = office
+    T = desk ;
+2 REDO location(T, office)
+2 EXIT (8) location(computer, office)
+    R = office
+    T = computer ;
+2 REDO location(T, office)
+2 FAIL location(T, office)
+1 REDO door(kitchen, R)
+1 EXIT (4) door(kitchen, cellar)
+2 CALL location(T, cellar)
+2 EXIT (4) location('washing machine', cellar)
+    R = cellar
+    T = 'washing machine' ;
+2 REDO location(T, cellar)
+2 FAIL location(T, cellar)
+1 REDO door(kitchen, R)
+1 FAIL door(kitchen, R)
+     no
+```
+
+---
+---
+
+# Appendix B - Useful `in-built` Predicates
+
+## IO Predicates
+
+* `write/1` : This predicate always succeeds when called, and has the side effect of writing its argument to the console. It always fails on backtracking. Backtracking does not undo the side effect.
+
+* `nl/0` : Succeeds, and starts a new line. Like write, it always succeeds when called, and fails on backtracking.
+
+* `tab/1` : It expects the argument to be an integer and tabs that number of spaces. It succeeds when called and fails on backtracking.
+
+## Control Predicates
+
+* `fail/0` : It gets control from the left, it immediately passes control back to the redo port of the goal on the left. It will never get control from the right, since it never allows control to pass to its right
+
+
 
 
