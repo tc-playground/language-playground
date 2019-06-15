@@ -181,7 +181,11 @@
 
 * __Disjunction ('or')__
 
-    * 
+    * Multiple 
+
+        ```
+        location(Thing, kitchen); location(Thing, study) 
+        ```
 
 * To understand the execution of a `compound query`, think of the goals as being _arranged from left to right_. 
 
@@ -243,7 +247,90 @@
 
     ![Predicate Ports Flow](./extra-logical-predicate-ports-flow-01.gif "Predicate Ports Flow")
    
+---
 
+## Rules
+
+* A `predicate` is either a `fact` or a `rule`.
+
+* A `rule` is a stored `query`.
+
+* `rule` syntax:
+
+    ```
+    head :- body_clause_01, ..., body_clause_N
+    ```
+
+    > NB: Read - `head if body`.
+
+* __Example__
+
+    ```
+    contains_food(Thing, Room) :- location(Thing, Room), edible(Thing).
+    ```
+
+    > NB: Read - `Room contains food IF there is a Thing in the Room AND the Thing is edible.
+
+* Rules can have multiple predicates:
+
+    ```
+    contains_food(Thing, Room) :- location(Thing,Room), tastes_yummy(Thing).
+    contains_food(Thing, Room) :- location(Thing,Room), tastes_yucky(Thing).
+    ```
+
+    > NB: It does no matter if it is `tasty` or `yucky`!
+
+* With `rules`, Prolog _unifies_ the `goal pattern` with the `head of the clause`. 
+
+    * If _unification succeeds_, then Prolog initiates a _new query using the goals in the body of the clause_.
+
+* Rules, provide `multiple levels` of `queries`. 
+
+    * The `first level` is composed of the `original goals`. 
+    
+    * The `second level` is a `new query composed of goals from the body of a clause from the first level`.
+
+    * When the next `clause` is a `rule` unification goes one level deeper.
+
+    * When the next clause is a `fact` unification can continue with the next `clause/goal`.
+
+    * This can continue. Each level can create even deeper levels until the interpreter runs out of space.
+
+        ![Rule Clause Ports Flow](./rule-clause-ports-flow-01.gif "Rule Clause Ports Flow")
+    
+    * The `variables` at different levels are `independent`.
+
+---
+
+## Predicate Chaining - Forcing Success and Failure
+
+* __Forcing Failure__
+
+    * The `fail` predicate can be used to force failure. This can be used to _list_ things.
+
+        ```
+        list_things(Place) :-  
+            location(Thing, Place),
+            tab(2),
+            write(Thing),
+            nl,
+            fail.
+        ```
+    * When used this `rule` will `fail` to execute any clauses to the _right_.
+
+* __Force Success__
+
+    * This limitation above be overcome by adding a second `list_things/1` clause _which always succeeds_.
+
+        ```
+        list_things(AnyPlace).
+        ```
+
+    * This can be facilitated with an `anonymous variable`.
+
+         ```
+        list_things(_).
+        ```   
 
 ---
 ---
