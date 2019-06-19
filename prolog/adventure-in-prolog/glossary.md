@@ -333,6 +333,35 @@
         ```   
 
 ---
+
+## Arithmetic
+
+* Arithmetic expressions can be expressed with the `is` operator:
+
+    * `X is <arithmetic expression>`
+
+        ```
+        ?- X is 3 * (4 + 2).
+        X = 18
+
+        ?- X is (8 / 4) / 2.
+        X = 1
+        ```
+
+    * The variable X is set to the value of the arithmetic expression. On backtracking it is unassigned.
+
+* Arithmetic comparisons can be expressed with the following operators:
+
+    * They succeed or fail according to whether the comparison is true or false.
+
+        ```
+        X > Y
+        X < Y
+        X >= Y
+        X =< Y
+        ```
+
+---
 ---
 
 ## Appendix A - Query Execution Example
