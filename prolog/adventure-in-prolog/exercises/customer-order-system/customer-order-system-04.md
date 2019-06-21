@@ -4,7 +4,7 @@
 
 1. Run `prolog` to start a shell.
 
-2. Load the program: `["customer-order-system-03.pl"].`
+2. Load the program: `["customer-order-system-04.pl"].`
 
 3. Enter __trace__ mode: `trace.`
 
