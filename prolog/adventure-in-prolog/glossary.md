@@ -420,6 +420,8 @@ Goal: door(kitchen, R), location(T,R)
 
 * `tab/1` : It expects the argument to be an integer and tabs that number of spaces. It succeeds when called and fails on backtracking.
 
+* `read/1` : It expects a variable that is assigned the input read.
+
 ## Control Predicates
 
 * `fail/0` : It gets control from the left, it immediately passes control back to the redo port of the goal on the left. It will never get control from the right, since it never allows control to pass to its right
