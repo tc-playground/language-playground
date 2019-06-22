@@ -34,11 +34,13 @@
 
 * Each `predicate` in a program is defined by the existence of one or more `clauses` in the database.
 
+* `predicates` can consist of multiple clauses.
+
 ---
 
 ## Clauses
 
-* A clause can either be a `fact` or a `rules`.
+* A clause can either be a `fact` or a `rule`.
 
 ---
 
@@ -360,6 +362,38 @@
         X >= Y
         X =< Y
         ```
+
+---
+
+## Knowledgebase - Dynamic Predicate Manipulation.
+
+* Knowledgebases contain `facts` and `rules`.
+
+* A Prolog `program` is a knowledgebase.
+
+* Knowledgebases are `static global state`.
+
+* Knowledgebases can be modified by special predicates that act on the global state:
+
+    * `asserta(X)` - Adds the clause X as the first clause for its predicate. Like the other I/O predicates, _it always fails on backtracking_ and _does not undo its work_.
+
+    * `assertz(X)` - Same as `asserta/1`, only it adds the clause X as the last clause for its predicate.
+
+    * `retract(X)` - Removes the clause X from the database, again with a permanent effect that is not undone on backtracking.
+
+* A `backtracking_assert` can be easily specified:
+
+    ```
+    backtracking_assert(X) :- asserta(X).
+    backtracking_assert(X) :- retract(X), fail.
+    ```
+
+* Eliminating global data and the 'assert' and 'retract' capabilities of Prolog is a goal of many logic programmers. 
+
+* It is possible to write Prolog programs without modifying the database, thus eliminating the problem of global variables. This is done by carrying the information as arguments to the predicates. 
+
+* The complete state of the program could be represented as predicate arguments, with each command called with the current state and returning a new modified state. 
+
 
 ---
 ---
