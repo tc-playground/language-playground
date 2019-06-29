@@ -10,7 +10,7 @@
 
 4. Can we go to the hall? : `can_go(hall).`
 
-7. Do some stuff:
+5. Do some stuff:
 
     ```
     look.
@@ -26,7 +26,7 @@
     take('washing machine').
     inventory.
     ```
-8. Do some more stuff.
+6. Do some more stuff.
 
     ```
     look.
@@ -44,9 +44,9 @@
     look.
     ```
 
-12. Disable __trace__ mode: `notrace.`
+7. Disable __trace__ mode: `notrace.`
 
-12. Exit the session : `halt.`
+8. Exit the session : `halt.`
 
 ---
 
