@@ -394,6 +394,34 @@
 
 * The complete state of the program could be represented as predicate arguments, with each command called with the current state and returning a new modified state. 
 
+---
+
+## Recursion
+
+---
+
+## Pragmatics
+
+* Both will give correct answers, but the performance of each will depend on the query (and how it affects the order in which variables are bound).
+
+    ```
+    is_contained_in(T1,T2):-
+        location(X,T2),
+        is_contained_in(T1,X).
+    ```
+
+    * The query `is_contained_in(X, office)` will execute faster. 
+    
+    ```
+    is_contained_in(T1,T2):-
+        location(T1,X),
+        is_contained_in(X,T2).
+    ```
+
+     * The query `is_contained_in(key, X)` will execute faster.
+
+
+
 
 ---
 ---
