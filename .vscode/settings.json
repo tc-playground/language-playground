@@ -1,13 +1,22 @@
 {
     "cSpell.words": [
         "Amzi",
+        "Entrypoint",
         "Knowledgebase",
         "Knowledgebases",
         "Leiningen",
         "Prolog's",
+        "Pythex",
         "Walkthrough",
+        "argparse",
         "asserta",
         "assertz",
-        "notrace"
+        "commandline",
+        "nargs",
+        "notrace",
+        "optparse",
+        "pylint",
+        "venv",
+        "virtualenv"
     ]
 }

@@ -1,4 +1,4 @@
-# Control Statments
+# Control Statements
 
 ## Conditionals
 

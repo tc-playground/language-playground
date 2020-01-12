@@ -4,7 +4,7 @@
 
 * `Python` has two main versions `Python3`, and, the _deprecated_ `Python 2`.
 
-* `Python` is an interpretted language, but, can be compiled.
+* `Python` is an interpreted language, but, can be compiled.
 
 * `Python` has a `REPL`.
 

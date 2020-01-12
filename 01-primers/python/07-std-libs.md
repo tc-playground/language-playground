@@ -21,9 +21,9 @@
 
 ---
 
-## Command Line Arguments and PRocesses
+## Command Line Arguments and Processes
 
-1. __optparser module__ - Handle commandline options.
+1. __optparse module__ - Handle commandline options.
 
     1. Parse command line arguments:
 
@@ -33,7 +33,7 @@
         parser.add_argument("--nice", type=str2bool, nargs='?',
                             const=True, default=False,
                             help="Activate nice mode.")
-        (options, erros) = parser.parse_args()
+        (options, errors) = parser.parse_args()
         print(options.nice)
 
         ```

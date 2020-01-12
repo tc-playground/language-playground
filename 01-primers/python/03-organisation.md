@@ -31,7 +31,7 @@
 
     2. `sys.argv[0]` - The first argument is the name of the python script that was the entrypoint.
 
-    3. `argparse` - Is a standard module to help with processing commandline arguments.
+    3. `argparse` / `optparse` - Is a standard module to help with processing commandline arguments.
 
 ---
 
@@ -41,7 +41,7 @@
 
 ## Modules and Imports
 
-1. __List__ the avilable modules via the `repl`: `help('modules')`
+1. __List__ the available modules via the `repl`: `help('modules')`
 
 2. __Install__  a module *via `pip3`): `pip3 install ${package_name}`
 
