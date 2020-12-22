@@ -35,7 +35,6 @@
                             help="Activate nice mode.")
         (options, errors) = parser.parse_args()
         print(options.nice)
-
         ```
 
 2. __subprocess module__ - Spawn new processes.
